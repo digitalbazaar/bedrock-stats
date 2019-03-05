@@ -9,17 +9,17 @@ const uuid = require('uuid-random');
 require('bedrock-stats');
 require('bedrock-stats-storage-redis');
 
-bedrock.events.on('bedrock-stats.report', async report => {
+bedrock.events.on('bedrock-stats.report', async ({_createdDate, monitors}) => {
 
   // generate mock report data
   const fooMonitor = {stat1: uuid()};
 
   // add the mock report the aggregate report which will be stored
-  report.fooMonitor = fooMonitor;
+  monitors.fooMonitor = fooMonitor;
 
   // add a copy of the report to mock data for assertions
   mockData.reports.set1.push({
-    createdDate: report._createdDate,
+    createdDate: _createdDate,
     monitors: {fooMonitor},
   });
 });
