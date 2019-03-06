@@ -3,14 +3,63 @@
  */
 'use strict';
 
-const brStatsStorageRedis = require('bedrock-stats-storage-redis');
+const brStats = require('bedrock-stats');
 const mockData = require('./mock.data');
+const {AssertionError} = require('assert');
 
 describe('Stats', () => {
-  it('stores five seconds of monitor reports using redis storage', async () => {
-    await sleep(5000);
-    const result = await brStatsStorageRedis.find({monitorIds: ['fooMonitor']});
-    result.should.eql(mockData.reports.set1);
+  describe('getReports API', () => {
+    it('throws AssertionError on missing `storageApi` param', async () => {
+      let error;
+      let result;
+      try {
+        result = await brStats.getReports({});
+      } catch(e) {
+        error = e;
+      }
+      should.not.exist(result);
+      should.exist(error);
+      (error instanceof AssertionError).should.be.true;
+    });
+    it('throws NotFoundError on an unknown storage API', async () => {
+      let error;
+      let result;
+      try {
+        result = await brStats.getReports({storageApi: 'unknown'});
+      } catch(e) {
+        error = e;
+      }
+      should.not.exist(result);
+      should.exist(error);
+      error.name.should.equal('NotFoundError');
+    });
+    it('returns a result', async () => {
+      // allow the mock monitor to generate some reports
+      await sleep(500);
+      let error;
+      let result;
+      try {
+        result = await brStats.getReports({
+          query: {monitorIds: ['fooMonitor']},
+          storageApi: 'redis'
+        });
+      } catch(e) {
+        error = e;
+      }
+      assertNoError(error);
+      should.exist(result);
+      result.should.be.an('array');
+    });
+  });
+  describe('Scheduled Job', () => {
+    it('stores monitor reports using redis storage', async () => {
+      await sleep(5000);
+      const result = await brStats.getReports({
+        query: {monitorIds: ['fooMonitor']},
+        storageApi: 'redis',
+      });
+      result.should.eql(mockData.reports.set1);
+    });
   });
 });
 

@@ -19,7 +19,9 @@
     "url": "https://github.com/digitalbazaar/bedrock-stats/issues"
   },
   "homepage": "https://github.com/digitalbazaar/bedrock-stats",
-  "dependencies": {},
+  "dependencies": {
+    "assert-plus": "^1.0.0"
+  },
   "peerDependencies": {
     "bedrock": "^1.12.0",
     "bedrock-jobs": "^3.0.0"
