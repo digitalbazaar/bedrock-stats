@@ -5,7 +5,7 @@
 
 const bedrock = require('bedrock');
 const mockData = require('./mocha/mock.data');
-const uuid = require('uuid-random');
+const {util: {uuid}} = bedrock;
 require('bedrock-stats');
 require('bedrock-stats-storage-redis');
 

@@ -19,10 +19,15 @@ Get all known monitor IDs.
 
 **Kind**: static method of [<code>bedrock-stats</code>](#module_bedrock-stats)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> - The monitor IDs.  
+**Throws**:
+
+- <code>BedrockError</code> Will throw a `NotFoundError` on an unknown storage
+  API.
+
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | <code>object</code> | The options to use. |
+| options | <code>Object</code> | The options to use. |
 | options.storageApi | <code>string</code> | The storage API to use. |
 
 <a name="module_bedrock-stats.getReports"></a>
@@ -32,6 +37,11 @@ Get a stats reports matching the query.
 
 **Kind**: static method of [<code>bedrock-stats</code>](#module_bedrock-stats)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - The stats report.  
+**Throws**:
+
+- <code>BedrockError</code> Will throw a `NotFoundError` on an unknown storage
+  API.
+
 
 | Param | Type | Description |
 | --- | --- | --- |
