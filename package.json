@@ -26,7 +26,7 @@
   "peerDependencies": {
     "bedrock": "1.15.0 - 3.x",
     "bedrock-jobs": "^3.0.0",
-    "bedrock-package-manager": "1.0.0"
+    "bedrock-package-manager": "^1.0.0"
   },
   "engines": {
     "node": ">=8.9.0"
