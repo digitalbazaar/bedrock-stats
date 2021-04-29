@@ -1,5 +1,10 @@
 # bedrock-stats ChangeLog
 
+## 2.0.0 - TBD
+
+### Changed
+- **BREAKING**: Stats collection is configured via a config and is now disabled by default.
+
 ## 1.0.2 - 2019-11-13
 
 ### Fixed
